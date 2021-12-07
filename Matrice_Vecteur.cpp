@@ -1,76 +1,135 @@
 /*
 -----------------------------------------------------------------------------------
 Nom du fichier : Matrice_Vecteur.cpp
-Auteur(s)      : Loïc Brasey
+Auteur(s)      : Loïc Brasey, Schneider Sebastian
 Date creation  : 7-12-2021
-Description    :
+Description    : Ce fichier contient les définitions de plusieurs fonctions
+                 utilitaires pour les vecteurs et les matrices d'entiés.
 
 Remarque(s)    : -
 Compilateur    : Mingw-w64 g++ 11.2.0
 -----------------------------------------------------------------------------------
 */
+
 #include "Matrice_Vecteur.h"
-#include <iostream>
-#include <vector>
-#include <numeric>
+#include <iostream>  // l'opérateur <<
+#include <vector>    // pour le type vecteur
+#include <algorithm> // pour for_each et all_of()
+#include <numeric>   // pour accumulate()
 
 using namespace std;
 
-ostream& operator<< (ostream& os, const V_int& v) {
+ostream& operator<< (ostream& os, const v_int& v) {
+	// Ajout du premier crochet
 	os << "[";
-	for (V_int::const_iterator i= v.begin(); i != v.end(); ++i) {
-		if (i != v.begin())
-			os << ", ";
+	
+	// Pour chaque élément du vecteur (itérateur).
+	for (v_int::const_iterator i= v.begin(); i != v.end(); ++i) {
+		
+		// Pour tous les passages sauf le premier, ajout de ", "
+		if (i != v.begin()) os << ", ";
+		
+		// Ajout de l'élément pointer par l'itérateur.
 		os << *i;
 	}
+	
+	// Ajout du crochet de fin
 	os << "]";
+	
+	//retour du flux
 	return os;
 }
 
 
-ostream& operator<< (ostream& os, const M_int& v) {
+ostream& operator<< (ostream& os, const m_int& v) {
+	// Ajout du premier crochet
 	os << "[";
-	for (M_int::const_iterator i= v.begin(); i != v.end(); ++i) {
-		if (i != v.begin())
-			os << ", ";
+	
+	// Pour chaque vecteur de la matrice (itérateur).
+	for (m_int::const_iterator i= v.begin(); i != v.end(); ++i) {
+		
+		// Pour tous les passages sauf le premier, ajout de "\n "
+		if (i != v.begin()) os << "\n ";
+		
+		// Ajout du vecteur pointer par l'itérateur.
 		os << *i;
 	}
+	
+	// Ajout du crochet de fin
 	os << "]";
+	
+	//retour du flux
 	return os;
 }
 
-bool estCarre(const M_int& m){
+bool estCarre(const m_int& m){
+	
+	// Si la matrice est vide on la considère comme carré.
 	if(m.empty())return true;
-	return all_of(m.begin(), m.end(),[&m](const V_int& v)
+	
+	// pour tous les vecteurs de la matrice on vérifie que leurs tailles soit
+	// la même que celle de la matrice et on retourne le résultat.
+	return all_of(m.begin(), m.end(),[&m](const v_int& v)
 					 {return m.size() == v.size();});
 }
 
-bool estReguliere(const M_int& m){
+bool estReguliere(const m_int& m){
+	
+	// Si la matrice est vide on la considère comme régulière.
 	if(m.empty())return true;
-	return all_of(m.begin(), m.end(),[&m](const V_int& v)
-	{return m[0].size() == v.size();});
+	
+	// pour tous les vecteurs de la matrice on vérifie que leurs tailles soit
+	// la même que celle de la première ligne matrice et on retourne le résultat.
+	return all_of(m.begin(), m.end(),[&m](const v_int& v)
+	{return m[0ull].size() == v.size();});
 }
 
-size_t minCol(const M_int& m){
-	if(m.empty())return 0;
-	size_t minimum = m[0].size();
-	for_each(m.begin(),m.end(),[&minimum](const V_int& v)
+size_t minCol(const m_int& m){
+	
+	// Si la matrice est vide on la considère que la taille du plus petit vecteur
+	// est 0.
+	if(m.empty())return 0ull;
+	
+	// On initialise une variable qui vaut la taille du premier vecteur de la matrice
+	size_t minimum = m[0ull].size();
+	
+	// Pour chaque vecteur de la matrice on vient comparer si leur taille est plus
+	// petite que la variable minimum et dans le cas échehant minimum prends la
+	// valeur de la taille du vecteur.
+	for_each(m.begin(),m.end(),[&minimum](const v_int& v)
 			  {minimum = min(minimum,v.size());});
+	
+	// On retourne minimum.
 	return minimum;
 }
 
-V_int sommeLigne(const M_int& m){
-	V_int resultat;
-	for_each(m.begin(),m.end(),[&resultat](const V_int& v)
+v_int sommeLigne(const m_int& m){
+	
+	// On initialise un vecteur de résultat vide qui va servir de retour plus tard.
+	v_int resultat;
+	
+	// Pour chaque vecteur de la matrice on ajoute la somme de tous ses éléments à
+	// la fin du vecteur de résultat.
+	for_each(m.begin(),m.end(),[&resultat](const v_int& v)
 	{resultat.push_back(accumulate(v.begin(),v.end(),0));});
+	
+	// on retourne le vecteur de résultat.
 	return resultat;
 }
 
-V_int sommeColonne(const M_int& m){
-	V_int resultat;
-	for_each(m.begin(),m.end(),[&resultat](const V_int& v)
+v_int sommeColonne(const m_int& m){
+	// On initialise un vecteur de résultat vide qui va servir de retour plus tard.
+	v_int resultat;
+	
+	// Pour chaque vecteur de la matrice
+	for_each(m.begin(),m.end(),[&resultat](const v_int& v)
+	// On resize le vecteur de résultat si le vecteur actuel est plus grand
 	{if(v.size() > resultat.size())resultat.resize(v.size());
-	 for(size_t i = 0; i < v.size(); i++)resultat[i] += v[i];
+	// On ajoute les éléments du vecteur actuel dans l'index correspondant du
+	// vecteur de résultat.
+	 for(size_t i = 0ull; i < v.size(); i++)resultat[i] += v[i];
 	});
+	
+	// on retourne le vecteur de résultat.
 	return resultat;
 }
