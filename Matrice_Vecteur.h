@@ -21,8 +21,11 @@ Compilateur    : Mingw-w64 g++ 11.2.0
 #include <random>    // pour default_random_engine
 #include <chrono>    // pour chrono::system_clock
 
+///@typedef  int
+typedef int                 data;
+
 ///@typedef  std::vector\<int>
-typedef std::vector<int>    v_int;
+typedef std::vector<data>   v_int;
 
 ///@typedef  std::vector\<vector\<int>>
 typedef std::vector<v_int>  m_int;

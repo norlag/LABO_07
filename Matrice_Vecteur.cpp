@@ -45,11 +45,20 @@ ostream& operator<< (ostream& os, const m_int& v) {
 	for (m_int::const_iterator i= v.begin(); i != v.end(); ++i) {
 		
 		// Pour tous les passages sauf le premier, ajout de "\n "
-		if (i != v.begin()) os << "\n ";
+		 os << (i != v.begin()?"), (":"(");
 		
-		// Ajout du vecteur pointer par l'itérateur.
-		os << *i;
+		// Pour chaque élément du vecteur (itérateur).
+		for (v_int::const_iterator j= i->begin(); j != i->end(); ++j) {
+			
+			// Pour tous les passages sauf le premier, ajout de ", "
+			if (j != i->begin()) os << ", ";
+			
+			// Ajout de l'élément pointer par l'itérateur.
+			os << *j;
+		}
+		
 	}
+	if(!v.empty())cout << ')';
 	
 	// Ajout du crochet de fin
 	os << "]";
@@ -131,6 +140,7 @@ v_int sommeColonne(const m_int& m){
 }
 
 v_int vectSommeMin(const m_int& m) {
+	
    // Retourne un itérateur sur le plus petit élément
    m_int::const_iterator i = min_element(m.cbegin(), m.cend(), [](const v_int& v1, const v_int& v2) {
       // Retourne la somme la plus petite
@@ -140,9 +150,9 @@ v_int vectSommeMin(const m_int& m) {
 
 void shuffleMatrice(m_int& m) {
    // Seed par rapport au temps
-   unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+   unsigned seed = unsigned(chrono::system_clock::now().time_since_epoch().count());
    // Mélange les vecteurs par rapport à la seed
-   shuffle(m.begin(),m.end(), std::default_random_engine(seed));
+   shuffle(m.begin(),m.end(), default_random_engine(seed));
 }
 
 void sortMatrice(m_int& m) {
