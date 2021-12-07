@@ -13,8 +13,13 @@ Compilateur    : Mingw-w64 g++ 11.2.0
 
 #ifndef VECTEUR_ET_MATRICE_07_MATRICE_VECTEUR_H
 #define VECTEUR_ET_MATRICE_07_MATRICE_VECTEUR_H
-#include <vector>   // pour le type vecteur
-#include <iostream> // pour l'opérateur <<
+
+#include <iostream>  // l'opérateur <<
+#include <vector>    // pour le type vecteur
+#include <algorithm> // pour for_each et all_of()
+#include <numeric>   // pour accumulate()
+#include <random>    // pour default_random_engine
+#include <chrono>    // pour chrono::system_clock
 
 ///@typedef  std::vector\<int>
 typedef std::vector<int>    v_int;
@@ -132,10 +137,10 @@ v_int sommeLigne(const m_int& m);
  */
 v_int sommeColonne(const m_int& m);
 
-V_int vectSommeMin(const M_int& m);
+v_int vectSommeMin(const m_int& m);
 
-void shuffleMatrice(M_int& m);
+void shuffleMatrice(m_int& m);
 
-void sortMatrice(M_int& m);
+void sortMatrice(m_int& m);
 
 #endif //VECTEUR_ET_MATRICE_07_MATRICE_VECTEUR_H

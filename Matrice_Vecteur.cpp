@@ -12,10 +12,6 @@ Compilateur    : Mingw-w64 g++ 11.2.0
 */
 
 #include "Matrice_Vecteur.h"
-#include <iostream>  // l'opérateur <<
-#include <vector>    // pour le type vecteur
-#include <algorithm> // pour for_each et all_of()
-#include <numeric>   // pour accumulate()
 
 using namespace std;
 
@@ -134,19 +130,24 @@ v_int sommeColonne(const m_int& m){
 	return resultat;
 }
 
-V_int vectSommeMin(const M_int& m) {
-   M_int::const_iterator i = min_element(m.cbegin(), m.cend(), [](const V_int& v1, const V_int& v2) {
+v_int vectSommeMin(const m_int& m) {
+   // Retourne un itérateur sur le plus petit élément
+   m_int::const_iterator i = min_element(m.cbegin(), m.cend(), [](const v_int& v1, const v_int& v2) {
+      // Retourne la somme la plus petite
       return accumulate(v1.cbegin(),v1.cend(),0) < accumulate(v2.cbegin(),v2.cend(),0); });
    return *i;
 }
 
-void shuffleMatrice(M_int& m) {
+void shuffleMatrice(m_int& m) {
+   // Seed par rapport au temps
    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+   // Mélange les vecteurs par rapport à la seed
    shuffle(m.begin(),m.end(), std::default_random_engine(seed));
 }
 
-void sortMatrice(M_int& m) {
-   sort(m.begin(), m.end(), [](const V_int& v1, const V_int& v2) {
+void sortMatrice(m_int& m) {
+   // Arrange les vecteurs
+   sort(m.begin(), m.end(), [](const v_int& v1, const v_int& v2) {
       return *min_element(v1.cbegin(), v1.cend()) < *min_element(v2.cbegin(), v2.cend());
    });
 }
