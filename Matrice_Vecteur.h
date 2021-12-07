@@ -27,7 +27,6 @@ typedef std::vector<int>    v_int;
 ///@typedef  std::vector\<vector\<int>>
 typedef std::vector<v_int>  m_int;
 
-
 /**
  *
  * @operator  \<\< vector\<int>
@@ -137,10 +136,45 @@ v_int sommeLigne(const m_int& m);
  */
 v_int sommeColonne(const m_int& m);
 
+/**
+ *
+ * @fn vectSommeMin()
+ *
+ * @brief Retour le vecteur d’une matrice dont la somme des valeurs
+ * est la plus faible. Si plusieurs vecteurs présentent la même
+ * somme, la fonction retourne celui d’indice le plus faible.
+ *
+ *
+ *
+ * @param[in] m         la matrice à traiter.
+ * @return vector<int>  le vecteur d’une matrice dont la somme des valeurs
+ * est la plus faible
+ */
 v_int vectSommeMin(const m_int& m);
 
+/**
+ *
+ * @fn shuffleMatrice()
+ *
+ * @brief Mélange l'ordre des vecteurs dans la matrice sans les modifier
+ *
+ *
+ *
+ * @param[in] m         la matrice à traiter.
+ * @return -
+ */
 void shuffleMatrice(m_int& m);
 
+/**
+ *
+ * @fn sortMatrice()
+ *
+ * @brief Trie dans l'ordre croissant les vecteurs en fonction du plus petit élément du vecteur
+ *
+ *
+ * @param[in] m         la matrice à traiter.
+ * @return -
+ */
 void sortMatrice(m_int& m);
 
 #endif //VECTEUR_ET_MATRICE_07_MATRICE_VECTEUR_H
