@@ -9,6 +9,7 @@ Remarque(s)    : -
 Compilateur    : Mingw-w64 g++ 11.2.0
 -----------------------------------------------------------------------------------
 */
+
 #include "Matrice_Vecteur.h"
 #include <iostream>
 #include <vector>
@@ -18,7 +19,7 @@ using namespace std;
 
 ostream& operator<< (ostream& os, const V_int& v) {
 	os << "[";
-	for (V_int::const_iterator i= v.begin(); i != v.end(); ++i) {
+	for (V_int::const_iterator i = v.begin(); i != v.end(); ++i) {
 		if (i != v.begin())
 			os << ", ";
 		os << *i;
@@ -30,7 +31,7 @@ ostream& operator<< (ostream& os, const V_int& v) {
 
 ostream& operator<< (ostream& os, const M_int& v) {
 	os << "[";
-	for (M_int::const_iterator i= v.begin(); i != v.end(); ++i) {
+	for (M_int::const_iterator i = v.begin(); i != v.end(); ++i) {
 		if (i != v.begin())
 			os << ", ";
 		os << *i;

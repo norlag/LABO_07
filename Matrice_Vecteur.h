@@ -1,38 +1,29 @@
-//
-// Created by Lobra on 07.12.2021.
-//
-
 #ifndef VECTEUR_ET_MATRICE_07_MATRICE_VECTEUR_H
 #define VECTEUR_ET_MATRICE_07_MATRICE_VECTEUR_H
 #include <vector>
 #include <iostream>
 
-
-
 typedef std::vector<int>  V_int;
-
 typedef std::vector<V_int>  M_int;
 
-
 std::ostream& operator<< (std::ostream& os, const V_int& v);
-
 std::ostream& operator<< (std::ostream& os, const M_int& v);
 
 /**
  *
  * @fn estCarre()
  *
- * @brief Retourne \b true si la matrice est carré.
+ * @brief Retourne \b true si la matrice est carrée.
  *
  * La fonction compare la taille de chaque ligne avec la taille
  * de la matrice.\n
- * À la première incoherence la fonction retourne false.\n
+ * À la première incohérence la fonction retourne false.\n
  * S'il n'y a pas d'incoherence la fonction retourne true.
  *
  * @note Les matrice vide sont considéré comme carré (\b true ).
  *
  * @param[in] m  la matrice à verifier.
- * @return bool  \b true si la matrice est carré sinon \b false.
+ * @return bool  \b true si la matrice est carrée sinon \b false.
  */
 bool estCarre(const M_int& m);
 
@@ -90,8 +81,5 @@ size_t minCol(const M_int& m);
 V_int sommeLigne(const M_int& m);
 
 V_int sommeColonne(const M_int& m);
-
-
-
 
 #endif //VECTEUR_ET_MATRICE_07_MATRICE_VECTEUR_H
