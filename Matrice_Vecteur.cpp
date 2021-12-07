@@ -40,38 +40,55 @@ ostream& operator<< (ostream& os, const M_int& v) {
 	return os;
 }
 
-bool estCarre(const M_int& m){
-	if(m.empty())return true;
+bool estCarre(const M_int& m) {
+	if(m.empty()) return true;
 	return all_of(m.begin(), m.end(),[&m](const V_int& v)
-					 {return m.size() == v.size();});
+					 { return m.size() == v.size(); });
 }
 
-bool estReguliere(const M_int& m){
-	if(m.empty())return true;
+bool estReguliere(const M_int& m) {
+	if(m.empty()) return true;
 	return all_of(m.begin(), m.end(),[&m](const V_int& v)
-	{return m[0].size() == v.size();});
+                { return m[0].size() == v.size(); });
 }
 
-size_t minCol(const M_int& m){
-	if(m.empty())return 0;
+size_t minCol(const M_int& m) {
+	if(m.empty()) return 0;
 	size_t minimum = m[0].size();
 	for_each(m.begin(),m.end(),[&minimum](const V_int& v)
-			  {minimum = min(minimum,v.size());});
+			  { minimum = min(minimum,v.size()); });
 	return minimum;
 }
 
-V_int sommeLigne(const M_int& m){
+V_int sommeLigne(const M_int& m) {
 	V_int resultat;
 	for_each(m.begin(),m.end(),[&resultat](const V_int& v)
-	{resultat.push_back(accumulate(v.begin(),v.end(),0));});
+	{ resultat.push_back(accumulate(v.begin(),v.end(),0)); });
 	return resultat;
 }
 
-V_int sommeColonne(const M_int& m){
+V_int sommeColonne(const M_int& m) {
 	V_int resultat;
 	for_each(m.begin(),m.end(),[&resultat](const V_int& v)
-	{if(v.size() > resultat.size())resultat.resize(v.size());
-	 for(size_t i = 0; i < v.size(); i++)resultat[i] += v[i];
+	{ if(v.size() > resultat.size()) resultat.resize(v.size());
+	 for(size_t i = 0; i < v.size(); i++) resultat[i] += v[i];
 	});
 	return resultat;
+}
+
+V_int vectSommeMin(const M_int& m) {
+   M_int::const_iterator i = min_element(m.cbegin(), m.cend(), [](const V_int& v1, const V_int& v2) {
+      return accumulate(v1.cbegin(),v1.cend(),0) < accumulate(v2.cbegin(),v2.cend(),0); });
+   return *i;
+}
+
+void shuffleMatrice(M_int& m) {
+   unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+   shuffle(m.begin(),m.end(), std::default_random_engine(seed));
+}
+
+void sortMatrice(M_int& m) {
+   sort(m.begin(), m.end(), [](const V_int& v1, const V_int& v2) {
+      return *min_element(v1.cbegin(), v1.cend()) < *min_element(v2.cbegin(), v2.cend());
+   });
 }

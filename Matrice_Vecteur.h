@@ -2,6 +2,8 @@
 #define VECTEUR_ET_MATRICE_07_MATRICE_VECTEUR_H
 #include <vector>
 #include <iostream>
+#include <random>       // default_random_engine
+#include <chrono>       // chrono::system_clock
 
 typedef std::vector<int>  V_int;
 typedef std::vector<V_int>  M_int;
@@ -81,5 +83,11 @@ size_t minCol(const M_int& m);
 V_int sommeLigne(const M_int& m);
 
 V_int sommeColonne(const M_int& m);
+
+V_int vectSommeMin(const M_int& m);
+
+void shuffleMatrice(M_int& m);
+
+void sortMatrice(M_int& m);
 
 #endif //VECTEUR_ET_MATRICE_07_MATRICE_VECTEUR_H
