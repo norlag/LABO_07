@@ -1,15 +1,52 @@
+/*
+-----------------------------------------------------------------------------------
+Nom du fichier : Matrice_Vecteur.h
+Auteur(s)      : Loïc Brasey, Schneider Sebastian
+Date creation  : 7-12-2021
+Description    : Ce fichier contient les déclarations de plusieurs fonctions
+                 utilitaires pour les vecteurs et les matrices d'entiés.
+
+Remarque(s)    : -
+Compilateur    : Mingw-w64 g++ 11.2.0
+-----------------------------------------------------------------------------------
+*/
+
 #ifndef VECTEUR_ET_MATRICE_07_MATRICE_VECTEUR_H
 #define VECTEUR_ET_MATRICE_07_MATRICE_VECTEUR_H
-#include <vector>
-#include <iostream>
-#include <random>       // default_random_engine
-#include <chrono>       // chrono::system_clock
+#include <vector>   // pour le type vecteur
+#include <iostream> // pour l'opérateur <<
 
-typedef std::vector<int>  V_int;
-typedef std::vector<V_int>  M_int;
+///@typedef  std::vector\<int>
+typedef std::vector<int>    v_int;
 
-std::ostream& operator<< (std::ostream& os, const V_int& v);
-std::ostream& operator<< (std::ostream& os, const M_int& v);
+///@typedef  std::vector\<vector\<int>>
+typedef std::vector<v_int>  m_int;
+
+
+/**
+ *
+ * @operator  \<\< vector\<int>
+ *
+ * @brief opérateur \<\< pour le type vector\<int>.
+ *
+ * L'operateur permet de convertir un vecteur d'entié au format: [1, 2, 3].\n
+ * Pour permètre de l'afficher via cout.
+ */
+std::ostream& operator<< (std::ostream& os, const v_int& v);
+
+/**
+ *
+ * @operator  \<\< vector\<vector\<int>>
+ *
+ * @brief opérateur \<\< pour le type vector\<vector\<int>>.
+ *
+ * L'opérateur permet de convertir un vecteur d'entié au format:\code
+ * [[1, 2, 3]
+ *  [1, 2]
+ *  [1, 2, 3]] \endcode
+ * Pour permètre de l'afficher via cout.
+ */
+std::ostream& operator<< (std::ostream& os, const m_int& v);
 
 /**
  *
@@ -27,8 +64,7 @@ std::ostream& operator<< (std::ostream& os, const M_int& v);
  * @param[in] m  la matrice à verifier.
  * @return bool  \b true si la matrice est carrée sinon \b false.
  */
-bool estCarre(const M_int& m);
-
+bool estCarre(const m_int& m);
 
 /**
  *
@@ -46,43 +82,55 @@ bool estCarre(const M_int& m);
  * @param[in] m  la matrice à verifier.
  * @return bool  \b true si la matrice est régulière sinon \b false.
  */
-bool estReguliere(const M_int& m);
+bool estReguliere(const m_int& m);
 
 /**
  *
  * @fn minCol()
  *
- * @brief Retourne la taille de la plus petite ligne de la matrice.
+ * @brief Retourne la taille du plus petit vecteur de la matrice.
  *
- * La fonction compare la taille de chaque ligne avec la taille
- * de la plus petit ligne croisé.\n
- * La fonction retourne ensuite la taille de la plus petite ligne croisé.
+ * La fonction compare la taille de chaque vecteur avec la taille
+ * du plus petit vecteur croisé.\n
+ * La fonction retourne ensuite la taille du plus petit vecteur croisé.
  *
  * @note Si la matrice d'entrée est vide, la fonction retourne 0.
  *
  * @param[in] m    la matrice à verifier.
  * @return size_t  la taille de la plus petit ligne de la matrice.
  */
-size_t minCol(const M_int& m);
+size_t minCol(const m_int& m);
 
 /**
  *
  * @fn sommeLigne()
  *
- * @brief Retourne vect.
+ * @brief Retourne un vecteur contenant la somme de chaque ligne de la matrice.
  *
- * La fonction compare la taille de chaque ligne avec la taille
- * de la plus petit ligne croisé.\n
- * La fonction retourne ensuite la taille de la plus petite ligne croisé.
+ * La fonction additionne les élément de  chaque ligne et ajoute le résultat à la
+ * fin d'un vecteur qui sera retourné a la fin de la fonction.\n
  *
- * @note Si la matrice d'entrée est vide, la fonction retourne 0.
- *
- * @param[in] m    la matrice à verifier.
- * @return size_t  la taille de la plus petit ligne de la matrice.
+ * @param[in] m         la matrice à traiter.
+ * @return vector<int>  vecteur contenant la somme de chaque ligne.
  */
-V_int sommeLigne(const M_int& m);
+v_int sommeLigne(const m_int& m);
 
-V_int sommeColonne(const M_int& m);
+/**
+ *
+ * @fn sommeColonne()
+ *
+ * @brief Retourne un vecteur contenant la somme de chaque colonne de la matrice.
+ *
+ * La fonction commence par initialisé un vecteur de résultat vide.\n
+ * Ensuite on prends les lignes une par une et verifie aaugmente le taille du vecteur
+ * de résultat si nécessaire puis ajouter chaque élément de la ligne dans l'index
+ * correspondant du vecteur de résultat.\n
+ * Pour finir la fonction retourne le vecteur de résultat.
+ *
+ * @param[in] m         la matrice à traiter.
+ * @return vector<int>  vecteur contenant la somme de chaque colonne.
+ */
+v_int sommeColonne(const m_int& m);
 
 V_int vectSommeMin(const M_int& m);
 
