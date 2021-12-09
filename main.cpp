@@ -2,8 +2,8 @@
 -----------------------------------------------------------------------------------
 Nom du fichier : main.cpp
 Auteur(s)      : Loïc Brasey, Schneider Sebastian
-Date creation  : 7-12-2021
-Description    : Ce fichier teste les fonctionalité de la librairie personalisé
+Date création  : 7-12-2021
+Description    : Ce fichier teste les fonctionalités de la librairie personalisée
                  Matrice_Vecteur.h
 
 Remarque(s)    : -

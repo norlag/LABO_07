@@ -17,7 +17,6 @@ Compilateur    : Mingw-w64 g++ 11.2.0
 #include <iostream>  // l'opérateur <<
 #include <vector>    // pour le type vecteur
 
-
 ///@typedef  int
 typedef int                 v_type;
 
