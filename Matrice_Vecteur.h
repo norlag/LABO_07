@@ -16,16 +16,13 @@ Compilateur    : Mingw-w64 g++ 11.2.0
 
 #include <iostream>  // l'opérateur <<
 #include <vector>    // pour le type vecteur
-#include <algorithm> // pour for_each et all_of()
-#include <numeric>   // pour accumulate()
-#include <random>    // pour default_random_engine
-#include <chrono>    // pour chrono::system_clock
+
 
 ///@typedef  int
-typedef int                 data;
+typedef int                 v_type;
 
 ///@typedef  std::vector\<int>
-typedef std::vector<data>   v_int;
+typedef std::vector<v_type> v_int;
 
 ///@typedef  std::vector\<vector\<int>>
 typedef std::vector<v_int>  m_int;
@@ -47,10 +44,7 @@ std::ostream& operator<< (std::ostream& os, const v_int& v);
  *
  * @brief opérateur \<\< pour le type vector\<vector\<int>>.
  *
- * L'opérateur permet de convertir un vecteur d'entié au format:\code
- * [[1, 2, 3]
- *  [1, 2]
- *  [1, 2, 3]] \endcode
+ * L'opérateur permet de convertir un vecteur d'entié au format: [(..),(..)]
  * Pour permètre de l'afficher via cout.
  */
 std::ostream& operator<< (std::ostream& os, const m_int& v);
@@ -114,8 +108,8 @@ size_t minCol(const m_int& m);
  *
  * @brief Retourne un vecteur contenant la somme de chaque ligne de la matrice.
  *
- * La fonction additionne les élément de  chaque ligne et ajoute le résultat à la
- * fin d'un vecteur qui sera retourné a la fin de la fonction.\n
+ * La fonction additionne les élément de  chaque ligne et ajoute le résultat dans
+ * un vecteur qui sera retourné a la fin de la fonction.\n
  *
  * @param[in] m         la matrice à traiter.
  * @return vector<int>  vecteur contenant la somme de chaque ligne.
@@ -146,7 +140,6 @@ v_int sommeColonne(const m_int& m);
  * @brief Retour le vecteur d’une matrice dont la somme des valeurs
  * est la plus faible. Si plusieurs vecteurs présentent la même
  * somme, la fonction retourne celui d’indice le plus faible.
- *
  *
  *
  * @param[in] m         la matrice à traiter.

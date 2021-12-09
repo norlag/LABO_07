@@ -12,8 +12,15 @@ Compilateur    : Mingw-w64 g++ 11.2.0
 */
 
 #include "Matrice_Vecteur.h"
+#include <algorithm> // pour for_each et all_of()
+#include <numeric>   // pour accumulate()
+#include <random>    // pour default_random_engine
+#include <chrono>    // pour chrono::system_clock
+#include <limits>    // pour numeric_limits<int>::min()
 
 using namespace std;
+
+const v_type MIN_DATA = numeric_limits<v_type>::min();
 
 ostream& operator<< (ostream& os, const v_int& v) {
 	// Ajout du premier crochet
@@ -95,28 +102,22 @@ size_t minCol(const m_int& m){
 	// est 0.
 	if(m.empty())return 0ull;
 	
-	// On initialise une variable qui vaut la taille du premier vecteur de la matrice
-	size_t minimum = m[0ull].size();
-	
 	// Pour chaque vecteur de la matrice on vient comparer si leur taille est plus
-	// petite que la variable minimum et dans le cas échehant minimum prends la
-	// valeur de la taille du vecteur.
-	for_each(m.begin(),m.end(),[&minimum](const v_int& v)
-			  {minimum = min(minimum,v.size());});
-	
-	// On retourne minimum.
-	return minimum;
+	// petite que le précédant pour trouver le minimum et on retourne la taille
+	// ensuite.
+	return min_element(m.begin(),m.end(),[](const v_int& v1,const v_int& v2)
+			  {return v1.size() < v2.size();})->size();
 }
 
 v_int sommeLigne(const m_int& m){
 	
 	// On initialise un vecteur de résultat vide qui va servir de retour plus tard.
-	v_int resultat;
+	v_int resultat(m.size());
 	
-	// Pour chaque vecteur de la matrice on ajoute la somme de tous ses éléments à
-	// la fin du vecteur de résultat.
-	for_each(m.begin(),m.end(),[&resultat](const v_int& v)
-	{resultat.push_back(accumulate(v.begin(),v.end(),0));});
+	// Pour chaque vecteur de la matrice on ajoute la somme de tous ses éléments dans
+	// le vecteur de résultat.
+	transform(m.begin(),m.end(),resultat.begin(),[](const v_int& v)
+	{return accumulate(v.begin(),v.end(),0);});
 	
 	// on retourne le vecteur de résultat.
 	return resultat;
@@ -158,6 +159,10 @@ void shuffleMatrice(m_int& m) {
 void sortMatrice(m_int& m) {
    // Arrange les vecteurs
    sort(m.begin(), m.end(), [](const v_int& v1, const v_int& v2) {
-      return *min_element(v1.cbegin(), v1.cend()) < *min_element(v2.cbegin(), v2.cend());
+      return(
+		// Compare les vecteurs par la valeur minimum vecteur
+		// Si ils sont vide, ils seront placés devant les autres
+      (v1.empty()?MIN_DATA:*min_element(v1.cbegin(), v1.cend()))<
+		(v2.empty()?MIN_DATA:*min_element(v2.cbegin(), v2.cend())));
    });
 }
