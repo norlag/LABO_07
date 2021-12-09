@@ -121,8 +121,8 @@ v_int sommeLigne(const m_int& m);
  *
  * @brief Retourne un vecteur contenant la somme de chaque colonne de la matrice.
  *
- * La fonction commence par initialisé un vecteur de résultat vide.\n
- * Ensuite on prends les lignes une par une et verifie aaugmente le taille du vecteur
+ * La fonction commence par initialiser un vecteur de résultat vide.\n
+ * Ensuite on prends les lignes une par une et verifie augmente le taille du vecteur
  * de résultat si nécessaire puis ajouter chaque élément de la ligne dans l'index
  * correspondant du vecteur de résultat.\n
  * Pour finir la fonction retourne le vecteur de résultat.
@@ -151,7 +151,12 @@ v_int vectSommeMin(const m_int& m);
  *
  * @fn shuffleMatrice()
  *
- * @brief Mélange l'ordre des vecteurs dans la matrice sans les modifier
+ * @brief Mélange l'ordre des vecteurs de manière aléatoire dans la matrice sans les modifier
+ *
+ * La fonction commence par initialiser la graine pour le générateur aléatoire,
+ * pour ensuite appeler la fonction shuffle de la librairie algorithme pour
+ * mélanger l'ordre des vecteurs de manière aléatoire de la matrice fournie en paramètre
+ * de la fonction
  *
  *
  *
@@ -165,6 +170,11 @@ void shuffleMatrice(m_int& m);
  * @fn sortMatrice()
  *
  * @brief Trie dans l'ordre croissant les vecteurs en fonction du plus petit élément du vecteur
+ *
+ * La fonction va appeler les fonctions sort et min_element de la librairie algorithme.
+ * Sort prend comme paramètre un itérateur sur la matrice passée en paramètre qui elle même va
+ * par le biais d'un predicate appeler les fonctions min_element afin de comparer la plus petite
+ * valeur des vecteurs qui composent la matrice à trier.
  *
  *
  * @param[in] m         la matrice à traiter.
